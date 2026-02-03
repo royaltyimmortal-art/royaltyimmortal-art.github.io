@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Play Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="text-align:center; background:#0f0f0f; color:white;">
+
+<h2 id="game-title">Loading...</h2>
+
+<iframe id="game-frame"
+        width="90%"
+        height="500"
+        frameborder="0"
+        allowfullscreen>
+</iframe>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const game = params.get("game");
+
+  const games = {
+    runner: {
+      title: "Endless Runner",
+      src: "games/runner/index.html"
+    },
+    clicker: {
+      title: "Clicker Game",
+      src: "games/clicker/index.html"
+    }
+  };
+
+  if (games[game]) {
+    document.getElementById("game-title").innerText = games[game].title;
+    document.getElementById("game-frame").src = games[game].src;
+  } else {
+    document.getElementById("game-title").innerText = "Game not found";
+  }
+</script>
+
+</body>
+</html>
