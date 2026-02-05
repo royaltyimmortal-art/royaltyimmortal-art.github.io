@@ -23,6 +23,43 @@
 <body>
 
 <canvas id="game" width="320" height="320"></canvas>
+let startX = 0;
+let startY = 0;
+
+canvas.addEventListener("touchstart", e => {
+  const t = e.touches[0];
+  startX = t.clientX;
+  startY = t.clientY;
+});
+
+canvas.addEventListener("touchmove", e => {
+  if (!startX || !startY) return;
+
+  const t = e.touches[0];
+  let diffX = t.clientX - startX;
+  let diffY = t.clientY - startY;
+
+  if (Math.abs(diffX) > Math.abs(diffY)) {
+    if (diffX > 0 && snake.dx === 0) {
+      snake.dx = grid;
+      snake.dy = 0;
+    } else if (diffX < 0 && snake.dx === 0) {
+      snake.dx = -grid;
+      snake.dy = 0;
+    }
+  } else {
+    if (diffY > 0 && snake.dy === 0) {
+      snake.dx = 0;
+      snake.dy = grid;
+    } else if (diffY < 0 && snake.dy === 0) {
+      snake.dx = 0;
+      snake.dy = -grid;
+    }
+  }
+
+  startX = 0;
+  startY = 0;
+});
 
 <script>
 const canvas = document.getElementById("game");
