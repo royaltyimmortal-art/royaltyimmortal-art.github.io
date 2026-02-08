@@ -23,6 +23,36 @@ body {
 .game-card:hover {
   background: #333;
 }
+#overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  color: #00ff00;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: monospace;
+  z-index: 10;
+}
+
+#startBtn {
+  padding: 10px 25px;
+  font-size: 18px;
+  background: black;
+  color: #00ff00;
+  border: 2px solid #00ff00;
+  cursor: pointer;
+}
+
+#score {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #00ff00;
+  font-size: 18px;
+}
 
 a {
   color: white;
