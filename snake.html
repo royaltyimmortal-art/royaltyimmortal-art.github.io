@@ -4,6 +4,37 @@
   <title>Snake Game</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    #overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  color: #00ff00;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: monospace;
+  z-index: 10;
+}
+
+#startBtn {
+  padding: 10px 25px;
+  font-size: 18px;
+  background: black;
+  color: #00ff00;
+  border: 2px solid #00ff00;
+  cursor: pointer;
+}
+
+#score {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #00ff00;
+  font-size: 18px;
+}
+
     body {
       margin: 0;
       background: #000;
@@ -67,11 +98,27 @@ canvas.addEventListener("touchmove", e => {
   startX = 0;
   startY = 0;
 });
+let running = false;
+
+const overlay = document.getElementById("overlay");
+const startBtn = document.getElementById("startBtn");
+
+startBtn.onclick = startGame;
+
+document.addEventListener("keydown", e => {
+  if (e.code === "Space" && !running) startGame();
+});
+
+function startGame() {
+ running = true;
+  overlay.style.display = "none";
+  running = true;
+}
 
 <script>
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
-
+ let running = false;
 let grid = 16;
 let count = 0;
 
@@ -94,6 +141,7 @@ function getRandomInt(min, max) {
 }
 
 function loop() {
+  if (!running) return;
   requestAnimationFrame(loop);
   if (++count < 4) return;
 
@@ -154,6 +202,7 @@ document.addEventListener("keydown", function(e) {
 });
 
 requestAnimationFrame(loop);
+  document.getElementById("startBtn").onclick = startGame;
 </script>
 
 </body>
