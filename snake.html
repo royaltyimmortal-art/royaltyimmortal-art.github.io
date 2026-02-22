@@ -92,16 +92,13 @@ canvas.addEventListener("touchmove", e => {
     } else if (diffY < 0 && snake.dy === 0) {
       snake.dx = 0;
       snake.dy = -grid;
-    }
+    
   }
 
   startX = 0;
   startY = 0;
 });
-let running = false;
 
-const overlay = document.getElementById("overlay");
-const startBtn = document.getElementById("startBtn");
 
 startBtn.onclick = startGame;
 
@@ -112,13 +109,21 @@ document.addEventListener("keydown", e => {
 function startGame() {
  running = true;
   overlay.style.display = "none";
-  running = true;
+  requestAnimationFrame(loop);
 }
 
 <script>
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
  let running = false;
+const overlay = document.getElementById("overlay");
+const startBtn = document.getElementById("startBtn");
+startBtn.onclick = startGame;
+  document.addEventListener("keydown", function (e) {
+  if (e.code === "Space" && !running) {
+    startGame();
+  }
+});
 let grid = 16;
 let count = 0;
 
@@ -142,7 +147,6 @@ function getRandomInt(min, max) {
 
 function loop() {
   if (!running) return;
-  requestAnimationFrame(loop);
   if (++count < 4) return;
 
   count = 0;
